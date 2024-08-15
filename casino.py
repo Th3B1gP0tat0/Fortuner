@@ -107,6 +107,84 @@ class Blackjack:
         else:
             print("It's a tie!")
 
-# Create a game instance and start the game
-game = Blackjack()
+# # Create a game instance and start the game
+# game = Blackjack()
+# game.play()
+
+
+class SlotMachine():
+    dict = {
+        1: 3,
+        2: 7,
+        3: 13,
+        4: 7,
+        5: 17,
+        6: 1,
+        7: 1,
+        8: 9,
+        9: 5,
+        10: 20,
+        11: 20,
+        12: 20,
+        13: 20,
+        14: 20,
+        15: 18,
+        16: 18,
+        17: 18,
+        18: 18,
+        19: 16,
+        20: 16,
+        21: 14,
+        22: 14,
+        23: 14,
+        24: 12,
+        25: 12,
+        26: 12,
+        27: 12,
+        28: 12,
+        29: 12,
+        30: 12,
+        31: 10,
+        32: 10
+    }
+
+    dict2 = {
+        1: "bar",
+        2: "blank",
+        3: "seven",
+        4: "blank",
+        5: "cherry",
+        6: "blank",
+        7: "bar",
+        8: "blank",
+        9: "bell",
+        10: "blank",
+        11: "seven",
+        12: "blank",
+        13: "grape",
+        14: "blank",
+        15: "orange",
+        16: "blank",
+        17: "bar",
+        18: "blank",
+        19: "seven",
+        20: "blank",
+        21: "cherry",
+        22: "blank"
+    }
+
+    def play(self):
+        num = random.randint(1, 32)
+        slot1 = self.dict2[self.dict[num]]
+        
+        num = random.randint(1, 32)
+        slot2 = self.dict2[self.dict[num]]
+
+        num = random.randint(1, 32)
+        slot3 = self.dict2[self.dict[num]]
+
+        print(slot1 + " " + slot2 + " " + slot3)
+
+
+game = SlotMachine()
 game.play()
