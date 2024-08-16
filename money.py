@@ -1,9 +1,11 @@
 import random
-class Bank():
-    def __init__(self, balance, savings, paycheck):
+
+class BankAndStocks():
+    def __init__(self, balance, savings, paycheck,investment):
         self.balance = balance
         self.savings = savings
         self.paycheck = paycheck
+        self.investment = investment
     def getInterest(self, interest_rate):
         self.savings = self.savings * (interest_rate + 1)
         return self.savings * (interest_rate + 1)
@@ -30,12 +32,24 @@ class Bank():
         self.balance -= tax_rate*self.paycheck
     def chargeRent(self, rent):
         self.balance -= rent
-#p1 = Bank(100000, 0, 800)
-#p1.chargeRent(5000)
-#print(p1.balance)
-class Stonks():
-    def __init__(self,rate,investment):
-        self.rate = rate
-        self.investment = investment
-    def fluctuation(self):
-        l = [1,2]
+
+#class Stonks(Bank):
+#    def __init__(self,investment):
+#        self.investment = investment
+    def fluctuation(self, rate):
+        rate = random.choice([0.95,1.1]) 
+        self.investment = self.investment * rate
+    def invest(self, amount):
+        if amount > self.balance:
+            return "Error: Amount invested is higher than current balance"
+        elif amount < 0:
+            return "Error: Cannot invest/liquidate negative numbers"
+        else:
+            self.balance -= amount
+            self.investment += amount
+    def liquidate(self):
+        if self.investment == 0:
+            return "You don't have anything invested"
+        else:
+            self.balance += self.investment
+            self.investment = 0
