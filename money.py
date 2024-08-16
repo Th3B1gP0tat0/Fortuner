@@ -32,10 +32,6 @@ class BankAndStocks():
         self.balance -= tax_rate*self.paycheck
     def chargeRent(self, rent):
         self.balance -= rent
-
-#class Stonks(Bank):
-#    def __init__(self,investment):
-#        self.investment = investment
     def fluctuation(self, rate):
         rate = random.choice([0.95,1.1]) 
         self.investment = self.investment * rate
