@@ -32,8 +32,8 @@ class BankAndStocks():
         self.balance -= tax_rate*self.paycheck
     def chargeRent(self, rent):
         self.balance -= rent
-    def fluctuation(self, rate):
-        rate = random.choice([0.95,1.1]) 
+    def fluctuation(self, lowerRate, upperRate):
+        rate = random.choice([lowerRate,upperRate]) #lower rate is the percent decreased, upper rate is percent increased (example: 5% decrease and 10% increase would be 0.95 and 1.1)
         self.investment = self.investment * rate
     def invest(self, amount):
         if amount > self.balance:
