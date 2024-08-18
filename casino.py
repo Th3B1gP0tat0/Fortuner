@@ -113,6 +113,9 @@ class Blackjack:
 
 
 class SlotMachine():
+
+    money = 1000
+
     dict = {
         1: 3,
         2: 7,
@@ -174,6 +177,8 @@ class SlotMachine():
     }
 
     def play(self):
+        self.money -= 10
+
         num = random.randint(1, 32)
         slot1 = self.dict2[self.dict[num]]
         
@@ -184,7 +189,35 @@ class SlotMachine():
         slot3 = self.dict2[self.dict[num]]
 
         print(slot1 + " " + slot2 + " " + slot3)
+        
+        if slot1 == slot2 == slot3 == "seven":
+            self.money += 150
+        elif slot1 == slot2 == slot3 == "bell":
+            self.money += 75
+        elif slot1 == slot2 == slot3 == "grape":
+            self.money += 50
+        elif slot1 == slot2 == slot3 == "cherry":
+            self.money += 50
+        elif slot1 == "seven" or slot2 == "seven" or slot3 == "seven":
+            self.money += 25
+        elif slot1 == "bell" or slot2 == "bell" or slot3 == "bell":
+            self.money += 20
+        elif slot1 == "grape" or slot2 == "grape" or slot3 == "grape":
+            self.money += 15
+        elif slot1 == "cherry" or slot2 == "cherry" or slot3 == "cherry":
+            self.money += 15
+        elif slot1 == slot2 == slot3 == "bar":
+            self.money += 7
+        elif slot1 == "bar" or slot2 == "bar" or slot3 == "bar":
+            self.money += 3
+        
+        print(self.money)
+
+        return slot1, slot2, slot3
 
 
 game = SlotMachine()
-game.play()
+count = 0
+while count < 1000:
+    game.play()
+    count+=1
