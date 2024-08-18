@@ -1,0 +1,6 @@
+money: 
+time:
+wasTimeSaved:
+shares1:
+shares2:
+shares3:
