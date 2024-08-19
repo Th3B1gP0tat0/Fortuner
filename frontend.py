@@ -4,6 +4,7 @@ import money
 import datetime
 import pyautogui
 
+
 playerBank = money.Bank(100000, 0, 0) #temporary, will store in a seperate txt file later
 app.width = 1500
 app.height = 1000
@@ -11,6 +12,28 @@ app.ucounter = 0
 app.daycounter = 0
 #pastTime = ''
 dayPlaceholder = 0
+
+
+
+background = Rect(0,0,1500,1000,fill="grey")
+
+#deposit1000box = Rect(150,400,150,150,fill="blue")
+#deposit10000box = Rect(320,400,150,150,fill="blue")
+#deposit100000box = Rect(490,400,150,150,fill="blue")
+#depositallbox = Rect(660,400,150,150,fill="blue")
+#withdraw1000box = Rect(150,590,150,150,fill="red")
+#withdraw10000box = Rect(320,590,150,150,fill="red")
+#withdraw100000box = Rect(490,590,150,150,fill="red")
+#withdrawallbox = Rect(660,590,150,150,fill="red")
+
+withdraw = Label("Withdraw",495,475,size=30,bold=True)
+deposit = Label("Deposit",200,475,size=30,bold=True)
+
+inputBox = Rect(150,500,400,100,fill="white",border="black")
+inputText = Label('',350,550,size = 30)
+errorText = Label("",350,610,size=20,fill = "red")
+#withdrawBox = Rect(150,610,400,100,fill="white",border="black")
+#withdrawText = Label('',350,660,size = 30)
 dayLabel = Label("",1400,25,size=20)
 balance = Label("",750, 30, size=30,border = "black", borderWidth = 2)
 
@@ -63,7 +86,7 @@ def giveInterest():
 for r in range(int(elapsed_time)):
     days = int(r/60)
     dayPlaceholder = days
-    print(days)
+
     app.daycounter = dayNumber
     if days != 0 and days % 182.5 == 0:
         giveInterest()
@@ -73,6 +96,7 @@ for r in range(int(elapsed_time)):
 app.daycounter += dayPlaceholder
 
 def onStep():
+    
     app.ucounter += 1/30
     app.daycounter += (1/30)/60
     if app.daycounter % 182.5 == 0:
@@ -85,15 +109,58 @@ def onStep():
  #   savings.value = "Current Savings: " + str(playerBank.savings)
 
 def onMousePress(mouseX, mouseY):
+    global inputIsClicked
+    global inputmode
+    
     if quitGame.hits(mouseX,mouseY) == True:
         Label('GAME SAVED. YOU CAN NOW EXIT OUT OF THE WINDOW',app.width/2,app.height/2,size = 35,fill = 'red', bold=True)
         save(1)
 
         #pyautogui.hotkey("alt", "f4")
         app.stop()
-
-
-
+    if inputBox.hits(mouseX,mouseY) == True:
+        inputIsClicked = True
+    else:
+        inputIsClicked = False
+        inputmode = 0
+    if deposit.hits(mouseX,mouseY) == True:
+        deposit.fill = "red"
+        withdraw.fill = "black"
+        inputmode = 1
+    elif withdraw.hits(mouseX,mouseY) == True:
+        deposit.fill = "black"
+        withdraw.fill = "red"
+        inputmode = 2
+    
+def onKeyPress(key):
+    
+    if inputIsClicked == True:
+        if key in ["1","2","3","4","5","6","7","8","9","0"]:
+            inputText.value += str(key)   
+        elif key == "backspace" and len(str(inputText.value)) > 0:
+            inputText.value = str(inputText.value).replace(str(inputText.value)[len(str(inputText.value))-1], '', 1)
+        elif key == "enter" and len(str(inputText.value)) > 0:
+            amount = float(inputText.value)
+            inputText.value = ''
+            withdraw.fill = "black"
+            deposit.fill = "black"
+            if inputmode == 1:
+                r = playerBank.depositSavings(amount)
+                if r != None:
+                    errorText.value = r
+                else:
+                    errorText.value = ''
+                    
+            elif inputmode == 2:
+                r = playerBank.withdrawSavings(amount)
+                if r != None:
+                    errorText.value = r
+                else:
+                    errorText.value = ''
+                    
+            else:
+                errorText.value = "Please choose deposit/withdraw mode"
+            
 def save(quit):
     with open("data.txt", "w") as file:
         file.write("money= " + str(playerBank.balance) + "\n")

@@ -19,7 +19,7 @@ class Bank():
         else:
             self.savings +=  amount
             self.balance -= amount
-            return amount
+
     def withdrawSavings(self, amount):
         if amount > self.savings:
             return "Error: Amount withdrawed is higher than current balance"
