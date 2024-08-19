@@ -113,9 +113,6 @@ class Blackjack:
 
 
 class SlotMachine():
-
-    money = 1000
-
     dict = {
         1: 3,
         2: 7,
@@ -176,8 +173,8 @@ class SlotMachine():
         22: "blank"
     }
 
-    def play(self):
-        self.money -= 10
+    def play(self, money):
+        money -= 10
 
         num = random.randint(1, 32)
         slot1 = self.dict2[self.dict[num]]
@@ -188,36 +185,38 @@ class SlotMachine():
         num = random.randint(1, 32)
         slot3 = self.dict2[self.dict[num]]
 
-        print(slot1 + " " + slot2 + " " + slot3)
+        # print(slot1 + " " + slot2 + " " + slot3)
         
         if slot1 == slot2 == slot3 == "seven":
-            self.money += 150
+            money += 150
         elif slot1 == slot2 == slot3 == "bell":
-            self.money += 75
+            money += 75
         elif slot1 == slot2 == slot3 == "grape":
-            self.money += 50
+            money += 50
         elif slot1 == slot2 == slot3 == "cherry":
-            self.money += 50
+            money += 50
         elif slot1 == "seven" or slot2 == "seven" or slot3 == "seven":
-            self.money += 25
+            money += 25
         elif slot1 == "bell" or slot2 == "bell" or slot3 == "bell":
-            self.money += 20
+            money += 20
         elif slot1 == "grape" or slot2 == "grape" or slot3 == "grape":
-            self.money += 15
+            money += 15
         elif slot1 == "cherry" or slot2 == "cherry" or slot3 == "cherry":
-            self.money += 15
+            money += 15
         elif slot1 == slot2 == slot3 == "bar":
-            self.money += 7
+            money += 7
         elif slot1 == "bar" or slot2 == "bar" or slot3 == "bar":
-            self.money += 3
+            money += 3
         
-        print(self.money)
+        # print(self.money)
 
-        return slot1, slot2, slot3
+        return slot1, slot2, slot3, money
 
 
-game = SlotMachine()
-count = 0
-while count < 1000:
-    game.play()
-    count+=1
+# game = SlotMachine()
+# output = game.play(1000)
+# print(output[0] + " " + output[1] + " " + output[2] + " " + str(output[3]))
+
+
+
+

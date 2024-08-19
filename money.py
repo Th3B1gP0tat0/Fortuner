@@ -52,6 +52,7 @@ class Bank():
         else:
             self.balance -= amount
             return amount
+        
 class Stonks():
     def __init__(self, decreaseRate, increaseRate):
         self.decreaseRate = decreaseRate

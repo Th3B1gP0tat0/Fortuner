@@ -1,6 +1,7 @@
-money: 
-time:
-wasTimeSaved:
-shares1:
-shares2:
-shares3:
+money: 100000
+savings: 0
+time: 2024-08-18 20:05:27
+didQuit: True
+stock1: 
+stock2: 
+stock3: 
