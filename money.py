@@ -8,7 +8,7 @@ class Bank():
         self.debtCounter = 0
     def getInterest(self, interest_rate):
         self.savings = self.savings * (interest_rate + 1)
-        return self.savings * (interest_rate + 1)
+        #return self.savings * (interest_rate + 1)
     def depositSavings(self, amount):
         if amount > self.balance:
             return "Error: Amount deposited is higher than current balance"
