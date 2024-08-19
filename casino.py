@@ -174,7 +174,7 @@ class SlotMachine():
     }
 
     def play(self, money):
-        money -= 10
+        money -= 1000
 
         num = random.randint(1, 32)
         slot1 = self.dict2[self.dict[num]]
@@ -188,25 +188,25 @@ class SlotMachine():
         # print(slot1 + " " + slot2 + " " + slot3)
         
         if slot1 == slot2 == slot3 == "seven":
-            money += 150
+            money += 15000
         elif slot1 == slot2 == slot3 == "bell":
-            money += 75
+            money += 7500
         elif slot1 == slot2 == slot3 == "grape":
-            money += 50
+            money += 5000
         elif slot1 == slot2 == slot3 == "cherry":
-            money += 50
+            money += 5000
         elif slot1 == "seven" or slot2 == "seven" or slot3 == "seven":
-            money += 25
+            money += 2500
         elif slot1 == "bell" or slot2 == "bell" or slot3 == "bell":
-            money += 20
+            money += 2000
         elif slot1 == "grape" or slot2 == "grape" or slot3 == "grape":
-            money += 15
+            money += 1500
         elif slot1 == "cherry" or slot2 == "cherry" or slot3 == "cherry":
-            money += 15
+            money += 1500
         elif slot1 == slot2 == slot3 == "bar":
-            money += 7
+            money += 700
         elif slot1 == "bar" or slot2 == "bar" or slot3 == "bar":
-            money += 3
+            money += 300
         
         # print(self.money)
 
@@ -216,7 +216,3 @@ class SlotMachine():
 # game = SlotMachine()
 # output = game.play(1000)
 # print(output[0] + " " + output[1] + " " + output[2] + " " + str(output[3]))
-
-
-
-
