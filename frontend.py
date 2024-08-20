@@ -26,12 +26,13 @@ background = Rect(0,0,1500,1000,fill="grey")
 #withdraw100000box = Rect(490,590,150,150,fill="red")
 #withdrawallbox = Rect(660,590,150,150,fill="red")
 
-withdraw = Label("Withdraw",495,475,size=30,bold=True)
-deposit = Label("Deposit",200,475,size=30,bold=True)
+options = Label('Click on the desired transaction and enter the amount of money', 750, 425, size = 25, fill="yellow")
+withdraw = Label("Withdraw",895,475,size=30,bold=True)
+deposit = Label("Deposit",600,475,size=30,bold=True)
 
-inputBox = Rect(150,500,400,100,fill="white",border="black")
-inputText = Label('',350,550,size = 30)
-errorText = Label("",350,610,size=20,fill = "red")
+inputBox = Rect(550,500,400,100,fill="white",border="black")
+inputText = Label('',750,550,size = 30)
+errorText = Label("",750,610,size=20,fill = "red")
 #withdrawBox = Rect(150,610,400,100,fill="white",border="black")
 #withdrawText = Label('',350,660,size = 30)
 dayLabel = Label("",1400,25,size=20)
@@ -88,9 +89,9 @@ for r in range(int(elapsed_time)):
     dayPlaceholder = days
 
     app.daycounter = dayNumber
-    if days != 0 and days % 182.5 == 0:
+    if days != 0 and days % 182 == 0:
         giveInterest()
-    if days != 0 % 7 == 0:
+    if days != 0 and days % 7 == 0:
         playerBank.payCheck()
 
 app.daycounter += dayPlaceholder

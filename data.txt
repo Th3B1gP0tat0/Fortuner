@@ -6,4 +6,4 @@ didQuit= True
 stock1= 
 stock2= 
 stock3= 
-day#= 33
+day#= 0
