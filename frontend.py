@@ -13,10 +13,11 @@ app.daycounter = 0
 #pastTime = ''
 dayPlaceholder = 0
 
-
+app.screens = 1
 
 background = Rect(0,0,1500,1000,fill="grey")
-
+background2 = Rect(0,0,1500,1000,fill='grey',opacity=0)
+app.inputmode = 0
 #deposit1000box = Rect(150,400,150,150,fill="blue")
 #deposit10000box = Rect(320,400,150,150,fill="blue")
 #deposit100000box = Rect(490,400,150,150,fill="blue")
@@ -27,25 +28,31 @@ background = Rect(0,0,1500,1000,fill="grey")
 #withdrawallbox = Rect(660,590,150,150,fill="red")
 
 options = Label('Click on the desired transaction and enter the amount of money', 750, 425, size = 25, fill="yellow")
-withdraw = Label("Withdraw",895,475,size=30,bold=True)
-deposit = Label("Deposit",600,475,size=30,bold=True)
+withdraw = Label("Withdraw",895,475,size=35,bold=True)
+deposit = Label("Deposit",600,475,size=35,bold=True)
 
-inputBox = Rect(550,500,400,100,fill="white",border="black")
+inputBox = Rect(550,500,400,100,fill="gray",border="black")
 inputText = Label('',750,550,size = 30)
 errorText = Label("",750,610,size=20,fill = "red")
 #withdrawBox = Rect(150,610,400,100,fill="white",border="black")
 #withdrawText = Label('',350,660,size = 30)
-dayLabel = Label("",1400,25,size=20)
-balance = Label("",750, 30, size=30,border = "black", borderWidth = 2)
+dayLabel = Label("",1400,25,size=30)
+balance = Label("",750, 30, size=37,border = "black", borderWidth = 2)
 
-savings = Label("",750,60,size=25)
+savings = Label("",750,60,size=30)
 quitGame = Circle(59, 60, 40, fill="red")
 quitGameText = Label("Save & Quit",59,60,size=15,font="symbols")
 
 
+gotostocks = Circle(1357,832,60, fill="white")
+gotomain = Circle(1357,832,60, fill="white")
+stocksImage = Image("https://icon-icons.com/downloadimage.php?id=258648&root=4066/PNG/64/&file=arrow_exchanges_exchange_growth_stock_market_bars_economy_stocks_icon_258648.png",1325,800)
+homeImage = Image("https://icon-icons.com/downloadimage.php?id=113416&root=1744/PNG/64/&file=3643769-building-home-house-main-menu-start_113416.png",1325,800)
 
+Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,dayLabel,balance,savings,quitGame,quitGameText,gotostocks,stocksImage)
+Screen2 = Group(background2,gotomain,homeImage)
+Screen2.opacity = 0
 
-#saveImage = Image("https://drive.google.com/u/0/drive-viewer/AKGpihaQTAPspoZ43noYckiRqx2MtrHShWKPMN0hKW7pW4bgvPBGjvLHiBp0rMDT7bW2MKe_m5utfi39rpgGwtfQGU9x35tnEXN9JdQ=s2560",30,20)
 
 with open("data.txt", "r") as read:
 
@@ -70,7 +77,6 @@ with open("data.txt", "r") as read:
             day = line.split("=")[1].strip()
             dayNumber = int(day)
             
-
 
 
 now = datetime.datetime.now()
@@ -106,32 +112,44 @@ def onStep():
         playerBank.payCheck()
     dayLabel.value = "day " + str(int(app.daycounter))
     balance.value = "$" +  str(pythonRound(playerBank.balance,2))
-    savings.value = "Savings: $" + str(pythonRound(playerBank.savings,2))
+    savings.value = "Bank: $" + str(pythonRound(playerBank.savings,2))
  #   savings.value = "Current Savings: " + str(playerBank.savings)
 
 def onMousePress(mouseX, mouseY):
     global inputIsClicked
-    global inputmode
     
-    if quitGame.hits(mouseX,mouseY) == True:
-        Label('GAME SAVED. YOU CAN NOW EXIT OUT OF THE WINDOW',app.width/2,app.height/2,size = 35,fill = 'red', bold=True)
-        save(1)
+    if app.screens == 1:
+        if quitGame.hits(mouseX,mouseY) == True:
+            Label('GAME SAVED. YOU CAN NOW EXIT OUT OF THE WINDOW',app.width/2,app.height/2,size = 35,fill = 'red', bold=True)
+            save(1)
 
         #pyautogui.hotkey("alt", "f4")
-        app.stop()
-    if inputBox.hits(mouseX,mouseY) == True:
-        inputIsClicked = True
-    else:
-        inputIsClicked = False
-        inputmode = 0
-    if deposit.hits(mouseX,mouseY) == True:
-        deposit.fill = "red"
-        withdraw.fill = "black"
-        inputmode = 1
-    elif withdraw.hits(mouseX,mouseY) == True:
-        deposit.fill = "black"
-        withdraw.fill = "red"
-        inputmode = 2
+            app.stop()
+        if inputBox.hits(mouseX,mouseY) == True:
+            inputIsClicked = True
+            inputBox.fill = "white"
+        else:
+            inputIsClicked = False
+            app.inputmode = 0
+            inputBox.fill="gray"
+        if deposit.hits(mouseX,mouseY) == True:
+            deposit.fill = "red"
+            withdraw.fill = "black"
+            app.inputmode = 1
+        elif withdraw.hits(mouseX,mouseY) == True:
+            deposit.fill = "black"
+            withdraw.fill = "red"
+            app.inputmode = 2
+        
+        if gotostocks.hits(mouseX,mouseY) == True:
+            Screen1.opacity = 0
+            Screen2.opacity = 100
+            app.screens = 2
+    elif app.screens == 2:
+        if gotomain.hits(mouseX,mouseY) == True:
+            Screen1.opacity = 100
+            Screen2.opacity = 0
+            app.screens = 1
     
 def onKeyPress(key):
     
@@ -145,14 +163,14 @@ def onKeyPress(key):
             inputText.value = ''
             withdraw.fill = "black"
             deposit.fill = "black"
-            if inputmode == 1:
+            if app.inputmode == 1:
                 r = playerBank.depositSavings(amount)
                 if r != None:
                     errorText.value = r
                 else:
                     errorText.value = ''
                     
-            elif inputmode == 2:
+            elif app.inputmode == 2:
                 r = playerBank.withdrawSavings(amount)
                 if r != None:
                     errorText.value = r
