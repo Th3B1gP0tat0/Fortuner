@@ -6,14 +6,21 @@ import pyautogui
 
 
 playerBank = money.Bank(100000, 0, 0) #temporary, will store in a seperate txt file later
+stock1 = money.Stonks(0.95,1.1)
+stock2 = money.Stonks(0.5,2)
+stock3 = money.Stonks(0.85,1.25)
+
 app.width = 1500
 app.height = 1000
 app.ucounter = 0
 app.daycounter = 0
+app.vanishcounter = 0
 #pastTime = ''
 dayPlaceholder = 0
 
 app.screens = 1
+
+
 
 background = Rect(0,0,1500,1000,fill="grey")
 background2 = Rect(0,0,1500,1000,fill='grey',opacity=0)
@@ -26,6 +33,8 @@ app.inputmode = 0
 #withdraw10000box = Rect(320,590,150,150,fill="red")
 #withdraw100000box = Rect(490,590,150,150,fill="red")
 #withdrawallbox = Rect(660,590,150,150,fill="red")
+
+
 
 options = Label('Click on the desired transaction and enter the amount of money', 750, 425, size = 25, fill="yellow")
 withdraw = Label("Withdraw",895,475,size=35,bold=True)
@@ -43,20 +52,26 @@ savings = Label("",750,60,size=30)
 quitGame = Circle(59, 60, 40, fill="red")
 quitGameText = Label("Save & Quit",59,60,size=15,font="symbols")
 
+machineBase = Rect(150,120,1200,500,fill="black")
+slotsBackground = Rect(250,200,1000,300,fill="white")
+slotsdivider1 = Rect(583,200,5,300,fill="gray",opacity = 30)
+slotsdivider2 = Rect(916,200,5,300,fill="gray",opacity = 30)
 
-gotostocks = Circle(1357,832,60, fill="white")
+
+
+gotosm = Circle(1357,832,60, fill="white")
 gotomain = Circle(1357,832,60, fill="white")
-stocksImage = Image("https://icon-icons.com/downloadimage.php?id=258648&root=4066/PNG/64/&file=arrow_exchanges_exchange_growth_stock_market_bars_economy_stocks_icon_258648.png",1325,800)
+smImage = Image("https://icon-icons.com/downloadimage.php?id=139008&root=2249/PNG/64/&file=slot_machine_outline_icon_139008.png",1325,800)
 homeImage = Image("https://icon-icons.com/downloadimage.php?id=113416&root=1744/PNG/64/&file=3643769-building-home-house-main-menu-start_113416.png",1325,800)
 
-Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,dayLabel,balance,savings,quitGame,quitGameText,gotostocks,stocksImage)
-Screen2 = Group(background2,gotomain,homeImage)
+Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,dayLabel,balance,savings,quitGame,quitGameText,gotosm,smImage)
+Screen2 = Group(background2,gotomain,homeImage,machineBase,slotsBackground,slotsdivider1,slotsdivider2)
 Screen2.opacity = 0
 
 
 with open("data.txt", "r") as read:
-
-    for line in read.readlines():
+    data = read.readlines()
+    for line in data:
         if line.startswith("money="):
             money_value = line.split('=')[1].strip()
             print(money_value)
@@ -72,44 +87,55 @@ with open("data.txt", "r") as read:
             pastTime = line.split("=")[1].strip()
         elif line.startswith("didQuit"):
             quit1 = line.split("=")[1].strip()
-            didQuit = bool(quit1)
+            #didQuit = bool(quit1)
+            print(quit1)
+            data[4] = "didQuit= False\n"
         elif line.startswith("day#"):
             day = line.split("=")[1].strip()
-            dayNumber = int(day)
+            if day != '':
+                dayNumber = int(day)
             
+with open("data.txt","w") as write:
+    write.writelines(data)
+if quit1 == True:
+    now = datetime.datetime.now()
+    if pastTime != '':
+        then = datetime.datetime.strptime(pastTime, '%Y-%m-%d %H:%M:%S')
+    else:
+        then = datetime.datetime.now()
+    elapsed_time = (now-then).total_seconds()
+    print(int(elapsed_time))
+    app.daycounter += (elapsed_time/60)
+app.daycounter += dayNumber
 
-
-now = datetime.datetime.now()
-then = datetime.datetime.strptime(pastTime, '%Y-%m-%d %H:%M:%S')
-
-elapsed_time = (now-then).total_seconds()
-print(int(elapsed_time))
-app.daycounter += int(elapsed_time/60)
 def giveInterest():
     playerBank.getInterest(0.05)
     print(playerBank.savings)
     #print on the screen that they gained interest
+if quit1 == True:
+    for r in range(int(elapsed_time)):
+        days = int(r/60)
+        dayPlaceholder = days
 
-for r in range(int(elapsed_time)):
-    days = int(r/60)
-    dayPlaceholder = days
-
-    app.daycounter = dayNumber
-    if days != 0 and days % 182 == 0:
-        giveInterest()
-    if days != 0 and days % 7 == 0:
-        playerBank.payCheck()
-
-app.daycounter += dayPlaceholder
+        app.daycounter = dayNumber
+        if days != 0 and days % 365 == 0:
+            giveInterest()
+        if days != 0 and days % 14 == 0:
+            playerBank.payCheck()
+if quit1 == True:
+    app.daycounter += dayPlaceholder
 
 def onStep():
     
     app.ucounter += 1/30
     app.daycounter += (1/30)/60
-    if app.daycounter % 182.5 == 0:
+    if app.daycounter % 182 == 0:
         giveInterest()
     if app.daycounter % 7 == 0:
         playerBank.payCheck()
+        playerBank.incomeTax(0.136)
+
+        
     dayLabel.value = "day " + str(int(app.daycounter))
     balance.value = "$" +  str(pythonRound(playerBank.balance,2))
     savings.value = "Bank: $" + str(pythonRound(playerBank.savings,2))
@@ -141,7 +167,7 @@ def onMousePress(mouseX, mouseY):
             withdraw.fill = "red"
             app.inputmode = 2
         
-        if gotostocks.hits(mouseX,mouseY) == True:
+        if gotosm.hits(mouseX,mouseY) == True:
             Screen1.opacity = 0
             Screen2.opacity = 100
             app.screens = 2

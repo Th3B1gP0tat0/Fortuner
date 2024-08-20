@@ -1,9 +1,9 @@
-money= 75000.0
-savings= 25000.0
+money= 100000.0
+savings= 0.0
 paycheck= 0.0
-time= 2024-08-19 19:24:13
-didQuit= True
+time= 
+didQuit= False
 stock1= 
 stock2= 
 stock3= 
-day#= 134
+day#= 3
