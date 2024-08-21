@@ -54,9 +54,8 @@ class Bank():
             return amount
         
 class Stonks():
-    def __init__(self, decreaseRate, increaseRate):
-        self.decreaseRate = decreaseRate
-        self.increaseRate = increaseRate
+    def __init__(self, rate):
+        self.rate = rate
         self.investment = 0
     def recieveInvestment(self, investment):
         self.investment += investment
@@ -68,5 +67,6 @@ class Stonks():
             self.investment = 0
             return r
     def fluctuation(self):
-        rate = random.choice([self.decreaseRate, self.increaseRate])
+        acceleration = [-0.05]
+        rate = random.choice([])
         self.investment = self.investment * rate
