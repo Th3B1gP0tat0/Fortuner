@@ -51,55 +51,55 @@ app.screens = 1
 
 #   savings.value = "Current Savings: " + str(playerBank.savings)
 app.date1 = Rect(1260, 20, 200, 100, fill=gradient('gold', 'orangeRed', 'coral', start='top-right'), border='black') # Date box
-app.dateLabel = Label(f'Day: {app.daycounter}', 1360, 70, size=40, bold=True)
+app.dateLabel = Label('', 1360, 70, size=40, bold=True)
 app.savings1 = Rect(320, 20, 830, 100, fill=gradient(rgb(127, 159, 159), rgb(134, 169, 171), rgb(145, 180, 183), rgb(158, 192, 196), rgb(172, 211, 214), rgb(184, 225, 228), rgb(197, 239, 239), start='right'), border='black')  # Savings Box
-app.savingsLabel = Label(f'Balance: ${playerBank.balance}', 710, 70, size=40, bold=True)
+app.savingsLabel = Label('', 710, 70, size=40, bold=True)
 
     # Drawing the main stock sections
 app.stock1box = Rect(60, 200, 400, 300, fill=gradient(rgb(128, 0, 32),rgb(153, 37, 58), rgb(179, 64, 84), rgb(204, 88, 111),rgb(229, 113, 138), start='right'), border='black')  # Stock 1
 app.stock1Label = Label("Apple", 260, 310, size=50, bold=True)
-app.stock1PriceLabel = Label(f'${pythonRound(stock1.price)}', 260, 390, size=50, bold=True)
-app.stock1ShareLabel = Label(f'Stocks Owned : {stock1.shares}', 260, 470, size=30, bold=True)
+app.stock1PriceLabel = Label('', 260, 390, size=50, bold=True)
+app.stock1ShareLabel = Label('', 260, 470, size=30, bold=True)
 
 app.stock2box = Rect(560, 200, 400, 300, fill=gradient(rgb(30, 77, 146), rgb(34, 111, 162), rgb(70, 130, 180), rgb(100, 149, 237), start='top-right'), border='black')  # Stock 2
 app.stock2Label = Label("Microsoft", 760, 310, size=50, bold=True)
-app.stock2PriceLabel = Label(f'${pythonRound(stock2.price)}', 760, 390, size=50, bold=True)
-app.stock2ShareLabel = Label(f'Stocks Owned : {stock2.shares}',760, 470, size=30, bold=True)
+app.stock2PriceLabel = Label('', 760, 390, size=50, bold=True)
+app.stock2ShareLabel = Label('',760, 470, size=30, bold=True)
 
 app.stock3box = Rect(1060, 200, 400, 300, fill=gradient( rgb(99, 74, 58), rgb(172, 130, 80), rgb(232, 197, 174), start='bottom-left'), border='black')  # Stock 3
 app.stock3Label = Label("Google", 1260, 310, size=50, bold=True)
-app.stock3PriceLabel = Label(f'${pythonRound(stock3.price,2)}', 1260, 390, size=50, bold=True)
-app.stock3ShareLabel = Label(f'Stocks Owned : {stock3.shares}', 1260, 470, size=30, bold=True)
+app.stock3PriceLabel = Label('', 1260, 390, size=50, bold=True)
+app.stock3ShareLabel = Label('', 1260, 470, size=30, bold=True)
 
 # Drawing the Buy/Sell buttons
 
-app.buy1Button = Rect(60, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black',opacity=0)  # Buy Stock 1
+app.buy1Button = Rect(60, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black')  # Buy Stock 1
 app.buy1Label = Label('Buy', 150, 600, size=40)
 
-app.sell1Button = Rect(270, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black',opacity=0)  # Sell Stock 1
+app.sell1Button = Rect(270, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black')  # Sell Stock 1
 app.sell1Label = Label('Sell', 370, 600, size=40, fill='black')
 
-app.buy2Button = Rect(560, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black',opacity=0)  # Buy/Sell Stock 2
+app.buy2Button = Rect(560, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black')  # Buy/Sell Stock 2
 app.buy2Label = Label('Buy', 650, 600, size=40)
-app.sell2Button = Rect(770, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black',opacity=0)  # Buy/Sell Stock 1
+app.sell2Button = Rect(770, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black')  # Buy/Sell Stock 1
 app.sell2Label = Label('Sell', 870, 600, size=40)
 
-app.buy3Button = Rect(1060, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black',opacity=0)  # Buy/Sell Stock 3
+app.buy3Button = Rect(1060, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black')  # Buy/Sell Stock 3
 app.buy3Label = Label('Buy', 1150, 600, size=40)
-app.sell3Button = Rect(1270, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black',opacity=0) # Buy/Sell Stock 1
+app.sell3Button = Rect(1270, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black') # Buy/Sell Stock 1
 app.sell3Label = Label('Sell', 1370, 600, size=40)
 
 
-background = Rect(0,0,1500,1000,fill=gradient(rgb(0, 18, 23), rgb(0, 32, 39), rgb(0, 46, 54), rgb(0, 60, 69), rgb(0, 73, 84), rgb(57, 105, 94), rgb(85, 139, 121), start='left-top'),opacity=0)
-background2 = Rect(0,0,1500,1000,fill=gradient(rgb(83, 2, 0), rgb(115, 0, 0), rgb(147, 0, 0), rgb(179, 0, 0), start='top-left'),opacity=0)
-background3 = Rect(0,0,1500,1000,fill=gradient(rgb(48, 207, 208), rgb(51, 8, 103), 'black', start='top-left'),opacity=0)
+background = Rect(0,0,1500,1000,fill=gradient(rgb(0, 18, 23), rgb(0, 32, 39), rgb(0, 46, 54), rgb(0, 60, 69), rgb(0, 73, 84), rgb(57, 105, 94), rgb(85, 139, 121), start='left-top'))
+background2 = Rect(0,0,1500,1000,fill=gradient(rgb(83, 2, 0), rgb(115, 0, 0), rgb(147, 0, 0), rgb(179, 0, 0), start='top-left'))
+background3 = Rect(0,0,1500,1000,fill=gradient(rgb(48, 207, 208), rgb(51, 8, 103), 'black', start='top-left'))
 
 app.inputmode = 0
 
 
 
 dayLabel = Label("",1400,25,size=40,fill = "white",opacity=100)
-balance = Label("",750, 30, size=37,fill="white",border = "white", borderWidth = 2)
+
 
 savings = Label("",750,60,size=30,fill="white")
 
@@ -124,24 +124,28 @@ slotsdivider2 = Rect(916,200,5,300,fill="gray",opacity = 30)
 
 gotostocks = Circle(1357,632,60,fill="white")
 gotosm = Circle(1357,832,60, fill="white")
-gotomain = Circle(1357,832,60, fill="white")
+gotomain = Circle(90,70,60, fill="white")
 gotomain2 = Circle(140,70,60, fill="lightSalmon")
 stocksImage = Image("https://icon-icons.com/downloadimage.php?id=258648&root=4066/PNG/64/&file=arrow_exchanges_exchange_growth_stock_market_bars_economy_stocks_icon_258648.png",1325,600)
 smImage = Image("https://icon-icons.com/downloadimage.php?id=139008&root=2249/PNG/64/&file=slot_machine_outline_icon_139008.png",1325,800)
-homeImage = Image("https://icon-icons.com/downloadimage.php?id=113416&root=1744/PNG/64/&file=3643769-building-home-house-main-menu-start_113416.png",1325,800)
+homeImage = Image("https://icon-icons.com/downloadimage.php?id=113416&root=1744/PNG/64/&file=3643769-building-home-house-main-menu-start_113416.png",58,35)
 homeImage2 = Image("https://icon-icons.com/downloadimage.php?id=113416&root=1744/PNG/64/&file=3643769-building-home-house-main-menu-start_113416.png",108, 35)
 
 spinButton = Circle(750,800,80,fill=gradient("red","darkred"))
-spinLabel = Label("SPIN!",750,800,fill = "gold",size=30)
+spinLabel = Label("SPIN!",750,800,fill = "gold",size=30,bold=True)
 
-Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,quitGame,quitGameText,gotosm,smImage,gotostocks,stocksImage,dayLabel,balance,savings)
-Screen2 = Group(background2,gotomain,homeImage,machineBase,slotsBackground,slotsdivider1,slotsdivider2,spinButton,spinLabel)
+infoLabel = Label("Win up to $15000!!! $1000 per spin.",750,60,size=20,fill="lightGreen",bold=True)
+notificationsLabel = Label("",750,700,size=20,fill = "white", bold=True)
+
+Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,quitGame,quitGameText,gotosm,smImage,gotostocks,stocksImage,dayLabel,savings)
+Screen2 = Group(background2,gotomain,homeImage,machineBase,slotsBackground,slotsdivider1,slotsdivider2,spinButton,spinLabel,infoLabel,notificationsLabel)
 Screen3 = Group(background3,gotomain2,homeImage2, app.savings1, app.savingsLabel, app.stock1box, app.stock1Label, app.stock2box, app.stock2Label, app.stock3box, app.stock3Label, app.buy1Button, app.buy2Button, app.buy3Button, app.buy1Label, app.buy2Label, app.buy3Label,  app.sell1Button, app.sell2Button, app.sell3Button, app.sell1Label, app.sell2Label, app.sell3Label, app.date1, app.dateLabel, app.stock1PriceLabel, app.stock2PriceLabel, app.stock3PriceLabel, app.stock1ShareLabel, app.stock2ShareLabel, app.stock3ShareLabel)
 Screen3.opacity = 0
 
 Screen1.opacity = 100
 Screen2.opacity = 0
 
+balance = Label("",750, 30, size=37,fill="white",border = "white", borderWidth = 2, opacity = 100)
 
 with open("data.txt", "r") as read:
     data = read.readlines()
@@ -229,49 +233,31 @@ def onStep():
     if app.screens == 3:
 
     #   savings.value = "Current Savings: " + str(playerBank.savings)
-        app.date1 = Rect(1260, 20, 200, 100, fill=gradient('gold', 'orangeRed', 'coral', start='top-right'), border='black') # Date box
-        app.dateLabel = Label(f'Day: {int(app.daycounter)}', 1360, 70, size=40, bold=True)
+        #app.date1 = Rect(1260, 20, 200, 100, fill=gradient('gold', 'orangeRed', 'coral', start='top-right'), border='black') # Date box
+        app.dateLabel.value = f'Day: {int(app.daycounter)}'
 
 
-        app.savings1 = Rect(320, 20, 830, 100, fill=gradient(rgb(127, 159, 159), rgb(134, 169, 171), rgb(145, 180, 183), rgb(158, 192, 196), rgb(172, 211, 214), rgb(184, 225, 228), rgb(197, 239, 239), start='right'), border='black')  # Savings Box
-        app.savingsLabel = Label(f'Balance: ${pythonRound(playerBank.balance,2)}', 710, 70, size=40, bold=True)
+        #app.savings1 = Rect(320, 20, 830, 100, fill=gradient(rgb(127, 159, 159), rgb(134, 169, 171), rgb(145, 180, 183), rgb(158, 192, 196), rgb(172, 211, 214), rgb(184, 225, 228), rgb(197, 239, 239), start='right'), border='black')  # Savings Box
+        app.savingsLabel.value = f'Balance: ${pythonRound(playerBank.balance,2)}'
 
         # Drawing the main stock sections
-        app.stock1box = Rect(60, 200, 400, 300, fill=gradient(rgb(128, 0, 32),rgb(153, 37, 58), rgb(179, 64, 84), rgb(204, 88, 111),rgb(229, 113, 138), start='right'), border='black')  # Stock 1
-        app.stock1Label = Label("Apple", 260, 310, size=50, bold=True)
-        app.stock1PriceLabel = Label(f'${pythonRound(stock1.price)}', 260, 390, size=50, bold=True)
-        app.stock1ShareLabel = Label(f'Stocks Owned : {stock1.shares}', 260, 470, size=30, bold=True)
+        #app.stock1box = Rect(60, 200, 400, 300, fill=gradient(rgb(128, 0, 32),rgb(153, 37, 58), rgb(179, 64, 84), rgb(204, 88, 111),rgb(229, 113, 138), start='right'), border='black')  # Stock 1
+        #app.stock1Label = Label("Apple", 260, 310, size=50, bold=True)
+        app.stock1PriceLabel.value = f'${pythonRound(stock1.price)}'
+        app.stock1ShareLabel.value = f'Stocks Owned : {stock1.shares}'
 
-        app.stock2box = Rect(560, 200, 400, 300, fill=gradient(rgb(30, 77, 146), rgb(34, 111, 162), rgb(70, 130, 180), rgb(100, 149, 237), start='top-right'), border='black')  # Stock 2
-        app.stock2Label = Label("Microsoft", 760, 310, size=50, bold=True)
-        app.stock2PriceLabel = Label(f'${pythonRound(stock2.price)}', 760, 390, size=50, bold=True)
-        app.stock2ShareLabel = Label(f'Stocks Owned : {stock2.shares}',760, 470, size=30, bold=True)
+        #app.stock2box = Rect(560, 200, 400, 300, fill=gradient(rgb(30, 77, 146), rgb(34, 111, 162), rgb(70, 130, 180), rgb(100, 149, 237), start='top-right'), border='black')  # Stock 2
+        #app.stock2Label = Label("Microsoft", 760, 310, size=50, bold=True)
+        app.stock2PriceLabel.value = f'${pythonRound(stock2.price)}'
+        app.stock2ShareLabel.value = f'Stocks Owned : {stock2.shares}'
 
-        app.stock3box = Rect(1060, 200, 400, 300, fill=gradient( rgb(99, 74, 58), rgb(172, 130, 80), rgb(232, 197, 174), start='bottom-left'), border='black')  # Stock 3
-        app.stock3Label = Label("Google", 1260, 310, size=50, bold=True)
-        app.stock3PriceLabel = Label(f'${pythonRound(stock3.price,2)}', 1260, 390, size=50, bold=True)
-        app.stock3ShareLabel = Label(f'Stocks Owned : {stock3.shares}', 1260, 470, size=30, bold=True)
-
-        # Drawing the Buy/Sell buttons
-
-        app.buy1Button = Rect(60, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black')  # Buy Stock 1
-        app.buy1Label = Label('Buy', 150, 600, size=40)
-
-        app.sell1Button = Rect(270, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black')  # Sell Stock 1
-        app.sell1Label = Label('Sell', 370, 600, size=40, fill='black')
-
-        app.buy2Button = Rect(560, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black')  # Buy/Sell Stock 2
-        app.buy2Label = Label('Buy', 650, 600, size=40)
-        app.sell2Button = Rect(770, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black')  # Buy/Sell Stock 1
-        app.sell2Label = Label('Sell', 870, 600, size=40)
-
-        app.buy3Button = Rect(1060, 550, 190, 100, fill= gradient(rgb(51, 214, 85), rgb(41, 172, 74), rgb(33, 130, 62), rgb(25, 100, 52), rgb(18, 73, 43), start='top-left'), border='black')  # Buy/Sell Stock 3
-        app.buy3Label = Label('Buy', 1150, 600, size=40)
-        app.sell3Button = Rect(1270, 550, 190, 100, fill= gradient(rgb(255, 110, 64), rgb(255, 68, 43), rgb(209, 40, 16), rgb(171, 52, 34), start='top-left'), border='black') # Buy/Sell Stock 1
-        app.sell3Label = Label('Sell', 1370, 600, size=40)
+       # app.stock3box = Rect(1060, 200, 400, 300, fill=gradient( rgb(99, 74, 58), rgb(172, 130, 80), rgb(232, 197, 174), start='bottom-left'), border='black')  # Stock 3
+       # app.stock3Label = Label("Google", 1260, 310, size=50, bold=True)
+        app.stock3PriceLabel.value = f'${pythonRound(stock3.price,2)}'
+        app.stock3ShareLabel.value = f'Stocks Owned : {stock3.shares}'
     else:
         Screen3.opacity = 0
-    app.ucounter += 1
+    app.ucounter += 1/30
     app.daycounter += (1/30)/60
     if app.daycounter % 182 == 0:
         giveInterest()
@@ -350,6 +336,7 @@ def onMousePress(mouseX, mouseY):
         if gotostocks.hits(mouseX,mouseY) == True:
             Screen1.opacity = 0
             Screen3.opacity = 100
+            balance.opacity = 0
             app.screens = 3
     elif app.screens == 2:
         if gotomain.hits(mouseX,mouseY) == True:
@@ -406,6 +393,7 @@ def onMousePress(mouseX, mouseY):
             playerBank.reduceBalance(1000)
             result = slots.play()
             playerBank.balance += result[3]
+            notificationsLabel.value = f"Congratulations! You won ${result[3]}!"
             if result[0] == "orange":
                 orange1.opacity = 100
             elif result[0] == "cherry":
@@ -448,6 +436,8 @@ def onMousePress(mouseX, mouseY):
         if gotomain2.hits(mouseX,mouseY)==True:
             Screen1.opacity = 100
             Screen3.opacity = 0
+            balance.opacity = 100
+
             app.screens = 1 
             
         if app.buy1Button.hits(mouseX,mouseY)==True:
@@ -459,7 +449,7 @@ def onMousePress(mouseX, mouseY):
                 playerBank.balance += amount
                 
         if app.buy2Button.hits(mouseX,mouseY)==True:
-            playerBank.reduceBalance(stock1.price)
+            playerBank.reduceBalance(stock2.price)
             stock2.shares += 1
         if app.sell2Button.hits(mouseX,mouseY)==True:
             amount = stock2.liquidate()
@@ -467,7 +457,7 @@ def onMousePress(mouseX, mouseY):
                 playerBank.balance += float(amount)
                 
         if app.buy3Button.hits(mouseX,mouseY)==True:
-            playerBank.reduceBalance(stock1.price)
+            playerBank.reduceBalance(stock3.price)
             stock3.shares += 1
         if app.sell3Button.hits(mouseX,mouseY)==True:
             amount = stock3.liquidate()
