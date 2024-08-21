@@ -1,2 +1,2 @@
-# EconomySim
+# Fortuner
 Economy Simulator
