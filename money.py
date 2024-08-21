@@ -53,20 +53,21 @@ class Bank():
             self.balance -= amount
             return amount
         
-class Stonks():
-    def __init__(self, rate):
-        self.rate = rate
-        self.investment = 0
-    def recieveInvestment(self, investment):
-        self.investment += investment
+class Stocks():
+    def __init__(self, rate, start):
+        self.rate = float(rate)
+        self.price = start
+        self.shares = 0
+    def addToPrice(self, price):
+        self.price += price
     def liquidate(self):
-        if self.investment == 0:
+        if self.price == 0:
             return "You don't have anything to liquidate"
         else:
-            r = self.investment
-            self.investment = 0
+            r = self.price
+            self.price = 0
             return r
     def fluctuation(self):
-        acceleration = [-0.05]
-        rate = random.choice([])
-        self.investment = self.investment * rate
+        acceleration = [-0.05, -0.10,-0.15,-0.25,-0.20,0.05,0.15,0.25,0.20,0.10]
+        self.rate += self.rate * float(random.choice([-0.05, -0.10,-0.15,-0.25,-0.20,0.05,0.15,0.25,0.20,0.10]))
+        self.price += self.rate
