@@ -113,100 +113,99 @@ class Blackjack:
 
 
 class SlotMachine():
-    dict = {
-        1: 3,
-        2: 7,
-        3: 13,
-        4: 7,
-        5: 17,
-        6: 1,
-        7: 1,
-        8: 9,
-        9: 5,
-        10: 20,
-        11: 20,
-        12: 20,
-        13: 20,
-        14: 20,
-        15: 18,
-        16: 18,
-        17: 18,
-        18: 18,
-        19: 16,
-        20: 16,
-        21: 14,
-        22: 14,
-        23: 14,
-        24: 12,
-        25: 12,
-        26: 12,
-        27: 12,
-        28: 12,
-        29: 12,
-        30: 12,
-        31: 10,
-        32: 10
-    }
+    def play():
+        money = 0
+        
+        dict1 = {
+            1: 3,
+            2: 7,
+            3: 13,
+            4: 7,
+            5: 17,
+            6: 1,
+            7: 1,
+            8: 9,
+            9: 5,
+            10: 20,
+            11: 20,
+            12: 20,
+            13: 20,
+            14: 20,
+            15: 18,
+            16: 18,
+            17: 18,
+            18: 18,
+            19: 16,
+            20: 16,
+            21: 14,
+            22: 14,
+            23: 14,
+            24: 12,
+            25: 12,
+            26: 12,
+            27: 12,
+            28: 12,
+            29: 12,
+            30: 12,
+            31: 10,
+            32: 10
+            }
 
-    dict2 = {
-        1: "bar",
-        2: "blank",
-        3: "seven",
-        4: "blank",
-        5: "cherry",
-        6: "blank",
-        7: "bar",
-        8: "blank",
-        9: "bell",
-        10: "blank",
-        11: "seven",
-        12: "blank",
-        13: "grape",
-        14: "blank",
-        15: "orange",
-        16: "blank",
-        17: "bar",
-        18: "blank",
-        19: "seven",
-        20: "blank",
-        21: "cherry",
-        22: "blank"
-    }
-
-    def play(self, money):
-        money -= 1000
-
+        dict2 = {
+            1: "bar",
+            2: "blank",
+            3: "seven",
+            4: "blank",
+            5: "cherry",
+            6: "blank",
+            7: "bar",
+            8: "blank",
+            9: "bell",
+            10: "blank",
+            11: "seven",
+            12: "blank",
+            13: "grape",
+            14: "blank",
+            15: "orange",
+            16: "blank",
+            17: "bar",
+            18: "blank",
+            19: "seven",
+            20: "blank",
+            21: "cherry",
+            22: "blank"
+            }
         num = random.randint(1, 32)
-        slot1 = self.dict2[self.dict[num]]
+        slot1 = dict2[dict1[num]]
         
         num = random.randint(1, 32)
-        slot2 = self.dict2[self.dict[num]]
+        slot2 = dict2[dict1[num]]
 
         num = random.randint(1, 32)
-        slot3 = self.dict2[self.dict[num]]
+        slot3 = dict2[dict1[num]]
 
         # print(slot1 + " " + slot2 + " " + slot3)
         
         if slot1 == slot2 == slot3 == "seven":
-            money += 15000
+            money = 15000
         elif slot1 == slot2 == slot3 == "bell":
-            money += 7500
+            money = 7500
         elif slot1 == slot2 == slot3 == "grape":
-            money += 5000
+            money = 5000
         elif slot1 == slot2 == slot3 == "cherry":
-            money += 5000
+            money = 5000
         elif slot1 == "seven" or slot2 == "seven" or slot3 == "seven":
-            money += 2500
+            money = 2500
         elif slot1 == "bell" or slot2 == "bell" or slot3 == "bell":
-            money += 2000
+            money = 2000
         elif slot1 == "grape" or slot2 == "grape" or slot3 == "grape":
-            money += 1500
+            money = 1500
         elif slot1 == "cherry" or slot2 == "cherry" or slot3 == "cherry":
-            money += 1500
+            money = 1500
         elif slot1 == slot2 == slot3 == "bar":
-            money += 700
+            money = 700
         elif slot1 == "bar" or slot2 == "bar" or slot3 == "bar":
-            money += 300
+            money = 300
         
         # print(self.money)
 

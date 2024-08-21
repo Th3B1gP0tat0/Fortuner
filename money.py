@@ -55,19 +55,22 @@ class Bank():
         
 class Stocks():
     def __init__(self, rate, start):
-        self.rate = float(rate)
+        self.rate = rate
         self.price = start
         self.shares = 0
     def addToPrice(self, price):
         self.price += price
     def liquidate(self):
-        if self.price == 0:
+        if self.shares == 0:
             return "You don't have anything to liquidate"
         else:
             r = self.price
-            self.price = 0
+            self.shares -= 1
             return r
     def fluctuation(self):
-        acceleration = [-0.05, -0.10,-0.15,-0.25,-0.20,0.05,0.15,0.25,0.20,0.10]
-        self.rate += self.rate * float(random.choice([-0.05, -0.10,-0.15,-0.25,-0.20,0.05,0.15,0.25,0.20,0.10]))
-        self.price += self.rate
+        rate = 0
+        rate += self.rate * float(random.choice([-0.05, -0.10,-0.15,-0.25,-0.20,0.05,0.15,0.25,0.20,0.10]))
+        self.price += rate
+        if self.price <= 0:
+            self.price = 0
+            self.price -= rate
