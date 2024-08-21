@@ -16,7 +16,7 @@ dayPlaceholder = 0
 app.screens = 1
 
 background = Rect(0,0,1500,1000,fill="grey")
-background2 = Rect(0,0,1500,1000,fill='grey',opacity=0)
+background2 = Rect(0,0,1500,1000,fill=gradient('darkred', 'black'),opacity=0)
 app.inputmode = 0
 #deposit1000box = Rect(150,400,150,150,fill="blue")
 #deposit10000box = Rect(320,400,150,150,fill="blue")
@@ -45,17 +45,12 @@ quitGameText = Label("Save & Quit",59,60,size=15,font="symbols")
 
 
 gotostocks = Circle(1357,832,60, fill="white")
-gotomain = Circle(1357,832,60, fill="white")
+gotomain = Circle(140,70,60, fill="lightSalmon")
 stocksImage = Image("https://icon-icons.com/downloadimage.php?id=258648&root=4066/PNG/64/&file=arrow_exchanges_exchange_growth_stock_market_bars_economy_stocks_icon_258648.png",1325,800)
-homeImage = Image("https://icon-icons.com/downloadimage.php?id=113416&root=1744/PNG/64/&file=3643769-building-home-house-main-menu-start_113416.png",1325,800)
-
-Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,dayLabel,balance,savings,quitGame,quitGameText,gotostocks,stocksImage)
-Screen2 = Group(background2,gotomain,homeImage)
-Screen2.opacity = 0
+homeImage = Image("https://icon-icons.com/downloadimage.php?id=113416&root=1744/PNG/64/&file=3643769-building-home-house-main-menu-start_113416.png",108, 35)
 
 
 with open("data.txt", "r") as read:
-
     for line in read.readlines():
         if line.startswith("money="):
             money_value = line.split('=')[1].strip()
@@ -76,7 +71,57 @@ with open("data.txt", "r") as read:
         elif line.startswith("day#"):
             day = line.split("=")[1].strip()
             dayNumber = int(day)
+        elif line.startswith("stock1"):
+            stock1Name = line.split("=")[1].strip()
+        elif line.startswith("stock2"):
+            stock2Name = line.split("=")[1].strip()
+        elif line.startswith("stock3"):
+            stock3Name = line.split("=")[1].strip()
             
+
+date = Rect(1260, 20, 200, 100, fill=gradient('gold', 'orangeRed', 'coral', start='top-right'), border='black') # Date box
+dateLabel = Label(f'Day: {day}', 1360, 70, size=40, bold=True)
+
+
+savings = Rect(320, 20, 830, 100, fill=gradient('lightGray',  'silver','lightSlateGray', start='right'), border='black')  # Savings Box
+savingsLabel = Label(f'Savings Current Value: ${savings_value}', 710, 70, size=40, bold=True)
+
+#goBack = Rect(1300, 20, 160, 100, fill="red", border='black')  # Back Button
+#goBackLabel = Label('Back', 1380, 70, size=40, bold=True)
+
+# Drawing the main stock sections
+stock1 = Rect(60, 200, 400, 300, fill=gradient('red', 'orange', 'yellow', start='right'), border='black')  # Stock 1
+stock1Label = Label(stock1Name, 260, 350, size=50, bold=True)
+
+stock2 = Rect(560, 200, 400, 300, fill=gradient('lightSteelBlue', 'navy' , 'purple', start='top-right'), border='black')  # Stock 2
+stock2Label = Label(stock2Name, 760, 350, size=50, fill='white', bold=True)
+
+stock3 = Rect(1060, 200, 400, 300, fill=gradient('green', 'cyan', start='bottom-left'), border='black')  # Stock 3
+stock3Label = Label(stock3Name, 1260, 350, size=50, bold=True)
+
+# Drawing the Buy/Sell buttons
+
+buy1Button = Rect(60, 550, 190, 100, fill='green', border='black')  # Buy Stock 1
+buy1Label = Label('Buy', 150, 600, size=40)
+
+sell1Button = Rect(270, 550, 190, 100, fill='red', border='black')  # Sell Stock 1
+sell1Label = Label('Sell', 370, 600, size=40, fill='black')
+
+buy2Button = Rect(560, 550, 190, 100, fill='green', border='black')  # Buy/Sell Stock 2
+buy2Label = Label('Buy', 650, 600, size=40)
+sell2Button = Rect(770, 550, 190, 100, fill='red', border='black')  # Buy/Sell Stock 1
+sell2Label = Label('Sell', 870, 600, size=40)
+
+buy3Button = Rect(1060, 550, 190, 100, fill='green', border='black')  # Buy/Sell Stock 3
+buy3Label = Label('Buy', 1150, 600, size=40)
+sell3Button = Rect(1270, 550, 190, 100, fill='red', border='black') # Buy/Sell Stock 1
+sell3Label = Label('Sell', 1370, 600, size=40)
+
+
+
+Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,dayLabel,balance,savings,quitGame,quitGameText,gotostocks,stocksImage)
+Screen2 = Group(background2,gotomain,homeImage, savings, savingsLabel, stock1, stock1Label, stock2, stock2Label, stock3, stock3Label, buy1Button, buy2Button, buy3Button, buy1Label, buy2Label, buy3Label,  sell1Button, sell2Button, sell3Button, sell1Label, sell2Label, sell3Label, date, dateLabel)
+Screen2.opacity = 0
 
 
 now = datetime.datetime.now()
@@ -122,7 +167,6 @@ def onMousePress(mouseX, mouseY):
         if quitGame.hits(mouseX,mouseY) == True:
             Label('GAME SAVED. YOU CAN NOW EXIT OUT OF THE WINDOW',app.width/2,app.height/2,size = 35,fill = 'red', bold=True)
             save(1)
-
         #pyautogui.hotkey("alt", "f4")
             app.stop()
         if inputBox.hits(mouseX,mouseY) == True:
@@ -146,10 +190,11 @@ def onMousePress(mouseX, mouseY):
             Screen2.opacity = 100
             app.screens = 2
     elif app.screens == 2:
-        if gotomain.hits(mouseX,mouseY) == True:
+        if gotomain.hits(mouseX,mouseY) or goBack.hits(mouseX, mouseY) == True:
             Screen1.opacity = 100
             Screen2.opacity = 0
             app.screens = 1
+        
     
 def onKeyPress(key):
     
