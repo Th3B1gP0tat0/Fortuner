@@ -137,9 +137,12 @@ spinLabel = Label("SPIN!",750,800,fill = "gold",size=30,bold=True)
 infoLabel = Label("Win up to $15000!!! $1000 per spin.",750,60,size=20,fill="lightGreen",bold=True)
 notificationsLabel = Label("",750,700,size=20,fill = "white", bold=True)
 
+app.errorStocks = Label('',750,800,fill="red",size=30)
+app.errorSM = Label('',750,700,fill="lightGreen",size=30)
+
 Screen1 = Group(background,options,withdraw,deposit,inputBox,inputText,errorText,quitGame,quitGameText,gotosm,smImage,gotostocks,stocksImage,dayLabel,savings)
-Screen2 = Group(background2,gotomain,homeImage,machineBase,slotsBackground,slotsdivider1,slotsdivider2,spinButton,spinLabel,infoLabel,notificationsLabel)
-Screen3 = Group(background3,gotomain2,homeImage2, app.savings1, app.savingsLabel, app.stock1box, app.stock1Label, app.stock2box, app.stock2Label, app.stock3box, app.stock3Label, app.buy1Button, app.buy2Button, app.buy3Button, app.buy1Label, app.buy2Label, app.buy3Label,  app.sell1Button, app.sell2Button, app.sell3Button, app.sell1Label, app.sell2Label, app.sell3Label, app.date1, app.dateLabel, app.stock1PriceLabel, app.stock2PriceLabel, app.stock3PriceLabel, app.stock1ShareLabel, app.stock2ShareLabel, app.stock3ShareLabel)
+Screen2 = Group(background2,gotomain,homeImage,machineBase,slotsBackground,slotsdivider1,slotsdivider2,spinButton,spinLabel,infoLabel,notificationsLabel,app.errorSM)
+Screen3 = Group(background3,gotomain2,homeImage2, app.savings1, app.savingsLabel, app.stock1box, app.stock1Label, app.stock2box, app.stock2Label, app.stock3box, app.stock3Label, app.buy1Button, app.buy2Button, app.buy3Button, app.buy1Label, app.buy2Label, app.buy3Label,  app.sell1Button, app.sell2Button, app.sell3Button, app.sell1Label, app.sell2Label, app.sell3Label, app.date1, app.dateLabel, app.stock1PriceLabel, app.stock2PriceLabel, app.stock3PriceLabel, app.stock1ShareLabel, app.stock2ShareLabel, app.stock3ShareLabel,app.errorStocks)
 Screen3.opacity = 0
 
 Screen1.opacity = 100
@@ -257,14 +260,14 @@ def onStep():
         app.stock3ShareLabel.value = f'Stocks Owned : {stock3.shares}'
     else:
         Screen3.opacity = 0
-    app.ucounter += 1/30
+    app.ucounter += 1
     app.daycounter += (1/30)/60
     if app.daycounter % 182 == 0:
         giveInterest()
     if app.daycounter % 7 == 0:
         playerBank.payCheck()
         playerBank.incomeTax(0.136)
-    if app.ucounter != 0 and app.ucounter % 15 == 0:
+    if app.ucounter != 0 and app.ucounter % 225 == 0:
         stock1.fluctuation()
         stock2.fluctuation()
         stock3.fluctuation()
@@ -366,7 +369,7 @@ def onMousePress(mouseX, mouseY):
             seven1.opacity = 0
             seven2.opacity = 0
             seven3.opacity = 0
-        if spinButton.hits(mouseX,mouseY)==True and playerBank.balance > 1000:
+        if spinButton.hits(mouseX,mouseY)==True and playerBank.balance >= 1000:
             orange1.opacity = 0
             orange2.opacity = 0
             orange3.opacity = 0
@@ -433,7 +436,7 @@ def onMousePress(mouseX, mouseY):
             elif result[2] == "seven":
                 seven3.opacity = 100
         else:
-            print("not enough money")
+            app.errorSM.value = "You can't afford this!"
     elif app.screens == 3:
         if gotomain2.hits(mouseX,mouseY)==True:
             Screen1.opacity = 100
@@ -445,33 +448,43 @@ def onMousePress(mouseX, mouseY):
         if app.buy1Button.hits(mouseX,mouseY)==True:
             output = buyStock("stock1", 1)
             if output == 0:
-                print("not enough money")
+                app.errorStocks.value = "You don't have enough money to buy this!"
                 # TODO
+            else:
+                app.errorStocks.value = ''
         if app.sell1Button.hits(mouseX,mouseY)==True:
             amount = stock1.liquidate()
             if amount != "You don't have anything to liquidate":
                 playerBank.balance += amount
+            else:
+                app.errorStocks.value = "You don't have anything to sell"
                 
         if app.buy2Button.hits(mouseX,mouseY)==True:
             output = buyStock("stock2", 1)
             if output == 0:
-                print("not enough money")
+                app.errorStocks.value = "You don't have enough money to buy this!"
                 # TODO
+            else:
+                app.errorStocks.value = ''
         if app.sell2Button.hits(mouseX,mouseY)==True:
             amount = stock2.liquidate()
             if amount != "You don't have anything to liquidate":
                 playerBank.balance += float(amount)
-                
+            else:
+                app.errorStocks.value = "You don't have anything to sell"
         if app.buy3Button.hits(mouseX,mouseY)==True:
             output = buyStock("stock3", 1)
             if output == 0:
-                print("not enough money")
+                app.errorStocks.value = "You don't have enough money to buy this!"
                 # TODO
+            else:
+                app.errorStocks.value = ''
         if app.sell3Button.hits(mouseX,mouseY)==True:
             amount = stock3.liquidate()
             if amount != "You don't have anything to liquidate":
                 playerBank.balance += amount
-        
+            else:
+                app.errorStocks.value = "You don't have anything to sell"
 def onKeyPress(key):
     
     if inputIsClicked == True:
