@@ -366,7 +366,7 @@ def onMousePress(mouseX, mouseY):
             seven1.opacity = 0
             seven2.opacity = 0
             seven3.opacity = 0
-        if spinButton.hits(mouseX,mouseY)==True:
+        if spinButton.hits(mouseX,mouseY)==True and playerBank.balance > 1000:
             orange1.opacity = 0
             orange2.opacity = 0
             orange3.opacity = 0
@@ -432,6 +432,8 @@ def onMousePress(mouseX, mouseY):
                 bar3.opacity = 100
             elif result[2] == "seven":
                 seven3.opacity = 100
+        else:
+            print("not enough money")
     elif app.screens == 3:
         if gotomain2.hits(mouseX,mouseY)==True:
             Screen1.opacity = 100
@@ -441,24 +443,30 @@ def onMousePress(mouseX, mouseY):
             app.screens = 1 
             
         if app.buy1Button.hits(mouseX,mouseY)==True:
-            playerBank.reduceBalance(stock1.price)
-            stock1.shares += 1
+            output = buyStock("stock1", 1)
+            if output == 0:
+                print("not enough money")
+                # TODO
         if app.sell1Button.hits(mouseX,mouseY)==True:
             amount = stock1.liquidate()
             if amount != "You don't have anything to liquidate":
                 playerBank.balance += amount
                 
         if app.buy2Button.hits(mouseX,mouseY)==True:
-            playerBank.reduceBalance(stock2.price)
-            stock2.shares += 1
+            output = buyStock("stock2", 1)
+            if output == 0:
+                print("not enough money")
+                # TODO
         if app.sell2Button.hits(mouseX,mouseY)==True:
             amount = stock2.liquidate()
             if amount != "You don't have anything to liquidate":
                 playerBank.balance += float(amount)
                 
         if app.buy3Button.hits(mouseX,mouseY)==True:
-            playerBank.reduceBalance(stock3.price)
-            stock3.shares += 1
+            output = buyStock("stock3", 1)
+            if output == 0:
+                print("not enough money")
+                # TODO
         if app.sell3Button.hits(mouseX,mouseY)==True:
             amount = stock3.liquidate()
             if amount != "You don't have anything to liquidate":
