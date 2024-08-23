@@ -219,6 +219,7 @@ def giveInterest():
 if quit1 == True:
     for r in range(int(elapsed_time)):
         days = int(r/60)
+        seconds = r
         dayPlaceholder = days
 
         app.daycounter = dayNumber
@@ -226,6 +227,10 @@ if quit1 == True:
             giveInterest()
         if days != 0 and days % 14 == 0:
             playerBank.payCheck()
+        if seconds != 0 and seconds % 15 == 0:
+            stock1.fluctuation()
+            stock2.fluctuation()
+            stock3.fluctuation()
 if quit1 == True:
     app.daycounter += dayPlaceholder
 
