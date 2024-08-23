@@ -1,8 +1,8 @@
 money= 10000.0
 savings= 100.0
 paycheck= 2000.0
-time= 2024-08-22 21:21:25
-didQuit= True
+time= 
+didQuit= False
 stock1.shares= 0.0
 stock1.rate= 100.0
 stock1.price= 1000
